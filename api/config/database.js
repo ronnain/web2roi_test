@@ -14,6 +14,7 @@ const getConnection = async () => {
     }
     return connection;
 };
+
 export const db = async (...args) => {
     const connection = await getConnection();
     const [res] = await connection.query(...args);
