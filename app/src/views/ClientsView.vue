@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import SelectMenu from "@/components/SelectMenu.vue";
 import Stats from "@/components/Stats.vue";
 
@@ -7,6 +7,9 @@ const loading = ref(false);
 const clients = ref(null);
 const selectedClient = ref(null);
 const selectOptions = ref(null);
+const lastSales = ref(null);
+const totalCA = ref(null);
+const totalSales = ref(null);
 
 async function getClients() {
   try {
@@ -37,11 +40,22 @@ async function getClientsData(id) {
       },
     });
     const data = await response.json();
-    return data.content;
+    lastSales.value = data.content.lastSales;
+    totalCA.value = data.content.totalCA;
+    totalSales.value = data.content.totalSales;
   } catch (error) {
     console.error(error);
   }
 }
+
+watch(
+  () => selectedClient.value,
+  (value) => {
+    if (value) {
+      getClientsData(value.id);
+    }
+  }
+);
 
 onMounted(async () => {
   loading.value = true;
@@ -54,9 +68,32 @@ onMounted(async () => {
 <template>
   <div>
     <div class="flex flex-col gap-10" v-if="!loading">
-      <SelectMenu :items="selectOptions" @update:selectedItem="selectedClient = $event" label="Sélectionner un client" />
+      <SelectMenu v-if="selectOptions" :items="selectOptions" @update:selectedItem="selectedClient = $event" label="Sélectionner un client" />
       <div v-if="selectedClient">
-        <Stats :name="`${selectedClient.name}`" :items="[]" />
+        <div class="flex flex-col gap-4">
+          <img :src="selectedClient.image" alt="" class="size-12 rounded-full" />
+          <Stats :name="`${selectedClient.name}`" :items="[totalCA, totalSales]" />
+        </div>
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead>
+            <tr>
+              <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Vente ID</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Prix</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">ROI</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Quantité</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+            <tr v-for="sale in lastSales" :key="sale.id">
+              <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{{ sale.id }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ sale.amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ sale.roi.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ sale.quantity }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div v-else>
