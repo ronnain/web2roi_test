@@ -4,7 +4,11 @@ import part1Service from '../services/part1.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    res.status(200).send(await part1Service.hello());
+    const sales = await part1Service.getLastSales();
+    res.json({
+        status: 'success',
+        content: sales
+    });
 });
 
 export default router;

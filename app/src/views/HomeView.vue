@@ -2,6 +2,26 @@
 import Sells from "@/components/Sells.vue";
 import MainStats from "@/components/MainStats.vue";
 import RecentClients from "@/components/RecentClients.vue";
+import { onMounted } from "vue";
+
+async function getLastSales() {
+  try {
+    const response = await fetch("http://localhost:3000/part1", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    return response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+onMounted(async () => {
+  const data = await getLastSales();
+})
 </script>
 
 <template>

@@ -1,20 +1,21 @@
 {
-    "name": "api",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "start": "node --watch app.js",
-        "lint": "eslint --ext .js ."
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "express": "^4.19.2",
-        "mysql2": "^3.9.3"
-    },
-    "devDependencies": {
-        "eslint": "^8.57.0"
-    }
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --watch app.js",
+    "lint": "eslint --ext .js ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
 }

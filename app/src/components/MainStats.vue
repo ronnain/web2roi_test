@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/20/solid'
 
+type Stat = {
+  name: string
+  stat: string
+  previousStat: string
+  change: string
+  changeType: 'increase' | 'decrease'
+}
+
 const stats = [
   { name: 'Total Subscribers', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
   { name: 'Avg. Open Rate', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
@@ -10,7 +18,9 @@ const stats = [
 
 <template>
   <div class="w-full">
-    <h3 class="text-base font-semibold leading-6 text-gray-900">Last 30 days</h3>
+    <h3 class="text-base font-semibold leading-6 text-gray-900">
+      Dashboard
+    </h3>
     <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
       <div v-for="item in stats" :key="item.name" class="px-4 py-5 sm:p-6">
         <dt class="text-base font-normal text-gray-900">{{ item.name }}</dt>

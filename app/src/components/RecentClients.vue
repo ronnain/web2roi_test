@@ -2,24 +2,35 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
 
+type Client = {
+  id: number
+  name: string
+  imageUrl: string
+  caTotal: number
+  lastSale: string
+}
+
 const clients = [
   {
     id: 1,
     name: 'Tuple',
     imageUrl: 'https://tailwindui.com/img/logos/48x48/tuple.svg',
-    lastInvoice: { date: 'December 13, 2022', dateTime: '2022-12-13', amount: '$2,000.00', status: 'Overdue' },
+    caTotal: 4000,
+    lastSale: 'July 19, 2021',
   },
   {
     id: 2,
     name: 'SavvyCal',
     imageUrl: 'https://tailwindui.com/img/logos/48x48/savvycal.svg',
-    lastInvoice: { date: 'January 22, 2023', dateTime: '2023-01-22', amount: '$14,000.00', status: 'Paid' },
+    caTotal: 3000,
+    lastSale: 'July 20, 2021',
   },
   {
     id: 3,
     name: 'Reform',
     imageUrl: 'https://tailwindui.com/img/logos/48x48/reform.svg',
-    lastInvoice: { date: 'January 23, 2023', dateTime: '2023-01-23', amount: '$7,600.00', status: 'Paid' },
+    caTotal: 2000,
+    lastSale: 'July 21, 2021',
   },
 ]
 </script>
@@ -27,8 +38,12 @@ const clients = [
 <template>
   <div class="w-full">
     <div class="flex items-center justify-between">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Recent clients</h2>
-      <a href="#" class="text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500">View all<span class="sr-only">, clients</span></a>
+      <h2 class="text-base font-semibold leading-7 text-gray-900">
+        Derniers clients
+      </h2>
+      <a href="#" class="text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+        Voir tout
+        <span class="sr-only">, clients</span></a>
     </div>
     <ul role="list" class="mt-6 flex flex-col gap-y-4">
       <li v-for="client in clients" :key="client.id" class="overflow-hidden rounded-xl border border-gray-200">
@@ -58,15 +73,15 @@ const clients = [
         </div>
         <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
           <div class="flex justify-between gap-x-4 py-3">
-            <dt class="text-gray-500">Last invoice</dt>
+            <dt class="text-gray-500">Dernière vente</dt>
             <dd class="text-gray-700">
-              <time :datetime="client.lastInvoice.dateTime">{{ client.lastInvoice.date }}</time>
+              <time :datetime="client.lastSale">{{ client.lastSale }}</time>
             </dd>
           </div>
           <div class="flex justify-between gap-x-4 py-3">
-            <dt class="text-gray-500">Amount</dt>
+            <dt class="text-gray-500">CA Total</dt>
             <dd class="flex items-start gap-x-2">
-              <div class="font-medium text-gray-900">{{ client.lastInvoice.amount }}</div>
+              <div class="font-medium text-gray-900">{{ client.caTotal }}</div>
             </dd>
           </div>
         </dl>

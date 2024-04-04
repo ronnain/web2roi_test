@@ -2,8 +2,8 @@ import mysql from 'mysql2/promise';
 
 const config = {
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: 'master',
+    password: 'harmony33893389',
     database: 'tech_interview'
 };
 
