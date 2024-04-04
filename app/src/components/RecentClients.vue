@@ -1,38 +1,22 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
+import type { PropType } from "vue";
 
 type Client = {
   id: number
   name: string
-  imageUrl: string
-  caTotal: number
+  logo: string
+  totalCA: number
   lastSale: string
+  createdAt: string
 }
 
-const clients = [
-  {
-    id: 1,
-    name: 'Tuple',
-    imageUrl: 'https://tailwindui.com/img/logos/48x48/tuple.svg',
-    caTotal: 4000,
-    lastSale: 'July 19, 2021',
+defineProps({
+  lastClients: {
+    type: Array as PropType<Client[]>,
   },
-  {
-    id: 2,
-    name: 'SavvyCal',
-    imageUrl: 'https://tailwindui.com/img/logos/48x48/savvycal.svg',
-    caTotal: 3000,
-    lastSale: 'July 20, 2021',
-  },
-  {
-    id: 3,
-    name: 'Reform',
-    imageUrl: 'https://tailwindui.com/img/logos/48x48/reform.svg',
-    caTotal: 2000,
-    lastSale: 'July 21, 2021',
-  },
-]
+})
 </script>
 
 <template>
@@ -43,12 +27,12 @@ const clients = [
       </h2>
       <a href="#" class="text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
         Voir tout
-        <span class="sr-only">, clients</span></a>
+      </a>
     </div>
     <ul role="list" class="mt-6 flex flex-col gap-y-4">
-      <li v-for="client in clients" :key="client.id" class="overflow-hidden rounded-xl border border-gray-200">
+      <li v-for="client in lastClients" :key="client.id" class="overflow-hidden rounded-xl border border-gray-200">
         <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-2">
-          <img :src="client.imageUrl" :alt="client.name" class="h-12 w-12 flex-none rounded-lg bg-white object-cover ring-1 ring-gray-900/10" />
+          <img :src="client.logo" :alt="client.name" class="size-8 flex-none rounded-lg bg-white p-1.5 ring-1 ring-gray-900/10" />
           <div class="text-sm font-medium leading-6 text-gray-900">{{ client.name }}</div>
           <Menu as="div" class="relative ml-auto">
             <MenuButton class="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500">
@@ -75,13 +59,15 @@ const clients = [
           <div class="flex justify-between gap-x-4 py-3">
             <dt class="text-gray-500">Dernière vente</dt>
             <dd class="text-gray-700">
-              <time :datetime="client.lastSale">{{ client.lastSale }}</time>
+              <time :datetime="client.lastSale">
+                {{ new Date(client.lastSale).toLocaleDateString() }}D
+              </time>
             </dd>
           </div>
           <div class="flex justify-between gap-x-4 py-3">
             <dt class="text-gray-500">CA Total</dt>
             <dd class="flex items-start gap-x-2">
-              <div class="font-medium text-gray-900">{{ client.caTotal }}</div>
+              <div class="font-medium text-gray-900">{{ client.totalCA.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) }}</div>
             </dd>
           </div>
         </dl>

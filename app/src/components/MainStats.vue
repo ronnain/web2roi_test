@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/20/solid'
 
-type Stat = {
-  name: string
-  stat: string
-  previousStat: string
-  change: string
-  changeType: 'increase' | 'decrease'
-}
+const props = defineProps({
+  totalCa: {
+    type: Number,
+  },
+  totalSales: {
+    type: Number,
+  },
+  totalClients: {
+    type: Number,
+  },
+})
 
 const stats = [
-  { name: 'Total Subscribers', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
-  { name: 'Avg. Open Rate', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
-  { name: 'Avg. Click Rate', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
+  { name: 'Total CA', stat: props.totalCa, previousStat: '€ 1,200,000', change: '12%', changeType: 'increase' },
+  { name: 'Total Vente', stat: props.totalSales, previousStat: '€ 1,000,000', change: '10%', changeType: 'increase' },
+  { name: 'Total Clients', stat: props.totalClients, previousStat: '1,200', change: '5%', changeType: 'decrease' },
 ]
 </script>
 
@@ -26,8 +30,7 @@ const stats = [
         <dt class="text-base font-normal text-gray-900">{{ item.name }}</dt>
         <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
           <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-            {{ item.stat }}
-            <span class="ml-2 text-sm font-medium text-gray-500">from {{ item.previousStat }}</span>
+            {{ parseInt(item.stat as string).toLocaleString('fr-FR', { style: item.name === 'Total CA' ? 'currency' : 'decimal', currency: 'EUR' }) }}
           </div>
 
           <div :class="[item.changeType === 'increase' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800', 'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0']">
