@@ -1,16 +1,8 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
+import type { Client } from "@/types/Client";
 import type { PropType } from "vue";
-
-type Client = {
-  id: number
-  name: string
-  logo: string
-  totalCA: number
-  lastSale: string
-  createdAt: string
-}
 
 defineProps({
   lastClients: {

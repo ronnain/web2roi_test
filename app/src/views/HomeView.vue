@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Sales from "@/components/Sales.vue";
-import MainStats from "@/components/MainStats.vue";
+import Stats from "@/components/Stats.vue";
 import RecentClients from "@/components/RecentClients.vue";
 import { onMounted, ref } from "vue";
 
@@ -43,7 +43,7 @@ onMounted(async () => {
   <div>
     <div class="flex flex-col gap-10" v-if="!loading">
       <div>
-        <MainStats :totalCa="totalCA" :totalSales="totalSales" :totalClients="totalClients" />
+        <Stats :items="[totalCA, totalSales, totalClients]" name="Dashboard" />
       </div>
       <div class="flex flex-col md:flex-row gap-10">
         <Sales :sales="sales" />

@@ -24,14 +24,32 @@ export default {
     },
     getCompanyTotalCA: async () => {
         const totalCA = await db('SELECT SUM(amount) as total FROM sales');
-        return totalCA[0].total;
+        return {
+            name: 'Chiffre d\'affaires total',
+            value: totalCA[0].total,
+            previousValue: totalCA[0].total,
+            variation: 0,
+            symbol: '€',
+        }
     },
     getCompanyTotalSales: async () => {
         const totalSales = await db('SELECT COUNT(*) as total FROM sales');
-        return totalSales[0].total;
+        return {
+            name: 'Nombre de ventes total',
+            value: totalSales[0].total,
+            previousValue: totalSales[0].total,
+            variation: 0,
+            symbol: '',
+        }
     },
     getCompanyTotalClients: async () => {
         const totalClients = await db('SELECT COUNT(*) as total FROM clients');
-        return totalClients[0].total;
+        return {
+            name: 'Nombre de clients total',
+            value: totalClients[0].total,
+            previousValue: totalClients[0].total,
+            variation: 0,
+            symbol: '',
+        }
     },
 };
