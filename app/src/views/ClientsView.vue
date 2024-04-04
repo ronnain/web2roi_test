@@ -3,7 +3,8 @@
 
 <template>
   <div>
-    Test
+    <h1>
+      Add your ClientsView here
+    </h1>
   </div>
 </template>
-
