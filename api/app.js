@@ -5,13 +5,23 @@ import dashboard from './routes/dashboard.js';
 const app = express();
 const port = 3000;
 
-app.use('/dashboard', dashboard);
-
 const corsOptions = {
-  origin: ['*'],
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+    'OPTIONS',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
 };
 
 app.use(cors(corsOptions));
+
+app.use('/dashboard', dashboard);
 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
