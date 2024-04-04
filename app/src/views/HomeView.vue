@@ -6,13 +6,9 @@ import { onMounted } from "vue";
 
 async function getLastSales() {
   try {
-    const response = await fetch("http://localhost:3000/part1", {
+    const response = await fetch("http://localhost:3000/dashboard", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
-    console.log(response);
     return response.json();
   } catch (error) {
     console.error(error);

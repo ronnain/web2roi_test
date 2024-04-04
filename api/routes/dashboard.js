@@ -1,10 +1,10 @@
 import express from 'express';
-import part1Service from '../services/part1.js';
+import dashboard from '../services/dashboard.js';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const sales = await part1Service.getLastSales();
+    const sales = await dashboard.getLastSales();
     res.json({
         status: 'success',
         content: sales
