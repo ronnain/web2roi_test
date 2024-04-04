@@ -18,12 +18,11 @@ const { items } = defineProps({
 const emit = defineEmits(['update:selectedItem'])
 const selectedItem = ref(items[0])
 
-watch(
-    () => selectedItem.value,
-    (value) => {
-      emit('update:selectedItem', value)
-    }
-)
+watch(() => selectedItem.value, (value) => {
+    emit('update:selectedItem', value)
+  }, {
+  immediate: true
+})
 </script>
 
 <template>
