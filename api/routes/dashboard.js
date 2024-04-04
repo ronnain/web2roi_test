@@ -5,9 +5,15 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const sales = await dashboard.getLastSales();
+    const lastClients = await dashboard.getLastClients();
+    const totalCA = await dashboard.getCompanyTotalCA();
     res.json({
         status: 'success',
-        content: sales
+        content: {
+            sales,
+            lastClients,
+            totalCA,
+        },
     });
 });
 

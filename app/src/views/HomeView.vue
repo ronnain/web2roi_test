@@ -8,6 +8,9 @@ async function getLastSales() {
   try {
     const response = await fetch("http://localhost:3000/dashboard", {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     return response.json();
   } catch (error) {
