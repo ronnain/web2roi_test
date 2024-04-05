@@ -18,12 +18,14 @@ router.get('/:id', async (req, res) => {
     const lastSales = await client.getLastSales(clientId);
     const totalCA = await client.getClientCA(clientId);
     const totalSales = await client.getClientTotalSales(clientId);
+    const salesByMonth = await client.getClientSalesByMonth(clientId);
     res.json({
         status: 'success',
         content: {
             lastSales,
             totalCA,
             totalSales,
+            salesByMonth,
         },
     });
 });

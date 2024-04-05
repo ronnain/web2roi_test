@@ -1,4 +1,5 @@
 import { db } from '../config/database.js';
+import dayjs from "dayjs";
 
 export default {
   getClients: async () => {
@@ -33,6 +34,19 @@ export default {
       previousValue,
       variation: (value - previousValue) / previousValue * 100,
       symbol: '',
+    }
+  },
+  getClientSalesByMonth: async (clientId) => {
+    const salesByMonth = await db('SELECT MONTH(date) as month, SUM(amount) as total FROM sales WHERE clientId = ? GROUP BY MONTH(date)', [clientId]);
+    const xaxis = [];
+    const yaxis = [];
+    for (const sale of salesByMonth) {
+      xaxis.push(dayjs().month(sale.month - 1).format('MMMM'));
+      yaxis.push(sale.total);
+    }
+    return {
+      xaxis,
+      yaxis,
     }
   }
 };

@@ -2,6 +2,7 @@
 import { onMounted, ref, watch } from "vue";
 import SelectMenu from "@/components/SelectMenu.vue";
 import Stats from "@/components/Stats.vue";
+import Chart from "@/components/Chart.vue";
 
 const loading = ref(false);
 const clients = ref(null);
@@ -10,6 +11,7 @@ const selectOptions = ref(null);
 const lastSales = ref(null);
 const totalCA = ref(null);
 const totalSales = ref(null);
+const salesByMonth = ref(null);
 
 async function getClients() {
   try {
@@ -43,6 +45,7 @@ async function getClientsData(id) {
     lastSales.value = data.content.lastSales;
     totalCA.value = data.content.totalCA;
     totalSales.value = data.content.totalSales;
+    salesByMonth.value = data.content.salesByMonth;
   } catch (error) {
     console.error(error);
   }
@@ -90,6 +93,9 @@ onMounted(async () => {
             </tr>
             </tbody>
           </table>
+        </div>
+        <div class="mt-10">
+          <Chart v-if="salesByMonth" name="Ventes mensuelles" :salesByMonth="salesByMonth" />
         </div>
       </div>
     </div>
