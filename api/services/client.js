@@ -1,5 +1,4 @@
 import { db } from '../config/database.js';
-import dayjs from "dayjs";
 
 export default {
   getClients: async () => {
@@ -41,7 +40,7 @@ export default {
     const xaxis = [];
     const yaxis = [];
     for (const sale of salesByMonth) {
-      xaxis.push(dayjs().month(sale.month - 1).format('MMMM'));
+      xaxis.push(new Date(0, sale.month - 1).toLocaleString('fr-FR', { month: 'long' }).charAt(0).toUpperCase() + new Date(0, sale.month - 1).toLocaleString('fr-FR', { month: 'long' }).slice(1));
       yaxis.push(sale.total);
     }
     return {
