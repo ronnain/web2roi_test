@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 const config = {
     host: 'localhost',
     user: 'master',
-    password: 'harmony33893389',
+    password: 'harmony33893389', // TODO change this password
     database: 'tech_interview'
 };
 

@@ -3,14 +3,15 @@ import { onMounted, ref, watch } from "vue";
 import SelectMenu from "@/components/SelectMenu.vue";
 import Stats from "@/components/Stats.vue";
 import Chart from "@/components/Chart.vue";
+import type { Stat } from "@/types/Stats";
 
 const loading = ref(false);
 const clients = ref(null);
-const selectedClient = ref(null);
+const selectedClient = ref<{ id: number; name: string; image: string } | null>(null);
 const selectOptions = ref(null);
-const lastSales = ref(null);
-const totalCA = ref(null);
-const totalSales = ref(null);
+const lastSales = ref();
+const totalCA = ref<Stat>();
+const totalSales = ref<Stat>();
 const salesByMonth = ref(null);
 
 async function getClients() {
@@ -22,7 +23,7 @@ async function getClients() {
       },
     });
     const data = await response.json();
-    selectOptions.value = data.content.clients.map((client) => ({
+    selectOptions.value = data.content.clients.map((client: any) => ({
       id: client.id,
       name: client.name,
       image: client.logo,
@@ -33,7 +34,7 @@ async function getClients() {
   }
 }
 
-async function getClientsData(id) {
+async function getClientData(id: number) {
   try {
     const response = await fetch(`http://localhost:3000/client/${id}`, {
       method: "GET",
@@ -45,15 +46,30 @@ async function getClientsData(id) {
     lastSales.value = data.content.lastSales;
     totalCA.value = data.content.totalCA;
     totalSales.value = data.content.totalSales;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getClientSalesByMonth(id: number) {
+  try {
+    const response = await fetch(`http://localhost:3000/client/${id}/sales`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
     salesByMonth.value = data.content.salesByMonth;
   } catch (error) {
     console.error(error);
   }
 }
 
-watch(() => selectedClient.value, (value) => {
+watch(() => selectedClient.value, (value: any) => {
     if (value) {
-      getClientsData(value.id);
+      getClientData(value.id);
+      getClientSalesByMonth(value.id);
     }
 });
 
@@ -69,7 +85,7 @@ onMounted(async () => {
   <div>
     <div class="flex flex-col gap-10" v-if="!loading">
       <SelectMenu v-if="selectOptions" :items="selectOptions" @update:selectedItem="selectedClient = $event" label="Sélectionner un client" />
-      <div v-if="selectedClient">
+      <div v-if="selectedClient && totalCA && totalSales && lastSales">
         <div class="flex flex-col gap-4">
           <img :src="selectedClient.image" alt="" class="size-12 rounded-full" />
           <Stats :name="`${selectedClient.name}`" :items="[totalCA, totalSales]" />
@@ -96,6 +112,14 @@ onMounted(async () => {
         </div>
         <div class="mt-10">
           <Chart v-if="salesByMonth" name="Ventes mensuelles" :salesByMonth="salesByMonth" />
+          <div v-else>
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">
+              Ventes mensuelles
+            </h3>
+            <div>
+              <p class="text-gray-500">Une erreur est survenue lors du chargement des données</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
