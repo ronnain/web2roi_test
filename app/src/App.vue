@@ -27,7 +27,7 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon },
   { name: 'Clients', href: '/clients', icon: FolderIcon },
-  { name: 'Employee', href: '/employee', icon: UsersIcon },
+  { name: 'Gestionnaires', href: '/gestionnaires', icon: UsersIcon },
 ]
 
 const userNavigation = [
