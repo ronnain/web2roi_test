@@ -68,7 +68,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Bechtelar','Evalyn','Clint38@hotmail.com','https://avatars.githubusercontent.com/u/33432635',2,'2024-04-03 16:26:54'),(2,'Cummerata','Bernita','Antwon_Bradtke78@hotmail.com','https://avatars.githubusercontent.com/u/53666833',1,'2024-04-03 16:28:13'),(3,'Corkery','Elinore','Margarett80@yahoo.com','https://avatars.githubusercontent.com/u/31246773',2,'2024-04-03 16:28:39'),(4,'Jones','Michele','Mckayla_Fisher@gmail.com','https://avatars.githubusercontent.com/u/25189146',2,'2024-04-03 16:29:03'),(5,'Heller','Eleanore','Helen79@gmail.com','https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/36.jpg',2,'2024-04-03 16:29:25'),(6,'Grant','Lola','Sebastian94@hotmail.com','https://avatars.githubusercontent.com/u/4249748',1,'2024-04-03 16:29:50'),(7,'John','Smith','joe@gmail.com','https://avatars.githubusercontent.com/u/4249748',3,'2024-04-03 16:29:50');
+INSERT INTO `employees` VALUES (1,'Bechtelar','Evalyn','Clint38@hotmail.com','https://avatars.githubusercontent.com/u/33432635',2,'2024-04-03 16:26:54'),(2,'Cummerata','Bernita','Antwon_Bradtke78@hotmail.com','https://avatars.githubusercontent.com/u/53666833',1,'2024-04-03 16:28:13'),(3,'Corkery','Elinore','Margarett80@yahoo.com','https://avatars.githubusercontent.com/u/31246773',2,'2024-04-03 16:28:39'),(4,'Jones','Michele','Mckayla_Fisher@gmail.com','https://avatars.githubusercontent.com/u/25189146',1,'2024-04-03 16:29:03'),(5,'Heller','Eleanore','Helen79@gmail.com','https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/36.jpg',1,'2024-04-03 16:29:25'),(6,'Grant','Lola','Sebastian94@hotmail.com','https://avatars.githubusercontent.com/u/4249748',1,'2024-04-03 16:29:50'),(7,'John','Smith','joe@gmail.com','https://avatars.githubusercontent.com/u/4249748',3,'2024-04-03 16:29:50');
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +97,7 @@ CREATE TABLE `employees_clients` (
 
 LOCK TABLES `employees_clients` WRITE;
 /*!40000 ALTER TABLE `employees_clients` DISABLE KEYS */;
-INSERT INTO `employees_clients` VALUES (1,6,7),(2,1,7),(3,1,8),(4,5,3),(5,6,4),(6,1,6),(7,4,1),(8,6,7),(9,6,1),(10,4,2);
+INSERT INTO `employees_clients` VALUES (1,6,7),(2,1,7),(3,1,8),(4,5,3),(5,6,4),(6,1,6),(7,4,1),(8,6,7),(9,6,1),(10,4,2),(11,2,8);
 /*!40000 ALTER TABLE `employees_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
