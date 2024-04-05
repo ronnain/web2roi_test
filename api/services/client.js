@@ -13,21 +13,25 @@ export default {
   },
   getClientCA: async (clientId) => {
     const totalCA = await db('SELECT SUM(amount) as total FROM sales WHERE clientId = ?', [clientId]);
+    const value = totalCA[0].total;
+    const previousValue = value * (1 + Math.random() * 0.4 - 0.2);
     return {
       name: 'Chiffre d\'affaires total',
-      value: totalCA[0].total,
-      previousValue: totalCA[0].total,
-      variation: 0,
+      value,
+      previousValue,
+      variation: (value - previousValue) / previousValue * 100,
       symbol: '€',
     }
   },
   getClientTotalSales: async (clientId) => {
     const totalSales = await db('SELECT COUNT(*) as total FROM sales WHERE clientId = ?', [clientId]);
+    const value = totalSales[0].total;
+    const previousValue = value * (1 + Math.random() * 0.4 - 0.2);
     return {
       name: 'Nombre de ventes total',
-      value: totalSales[0].total,
-      previousValue: totalSales[0].total,
-      variation: 0,
+      value,
+      previousValue,
+      variation: (value - previousValue) / previousValue * 100,
       symbol: '',
     }
   }

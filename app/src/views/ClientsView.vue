@@ -48,14 +48,11 @@ async function getClientsData(id) {
   }
 }
 
-watch(
-  () => selectedClient.value,
-  (value) => {
+watch(() => selectedClient.value, (value) => {
     if (value) {
       getClientsData(value.id);
     }
-  }
-);
+});
 
 onMounted(async () => {
   loading.value = true;

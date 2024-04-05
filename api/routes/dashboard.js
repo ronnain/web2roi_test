@@ -1,5 +1,6 @@
 import express from 'express';
 import dashboard from '../services/dashboard.js';
+import { generateSales } from "../config/database.js";
 
 const router = express.Router();
 
@@ -18,6 +19,15 @@ router.get('/', async (req, res) => {
             totalSales,
             totalClients,
         },
+    });
+});
+
+// only for testing purpose
+router.post('/generate-sales', async (req, res) => {
+    await generateSales();
+    res.json({
+        status: 'success',
+        content: 'Sales generated',
     });
 });
 

@@ -23,7 +23,7 @@ defineProps({
     </div>
     <ul role="list" class="mt-6 flex flex-col gap-y-4">
       <li v-for="client in lastClients" :key="client.id" class="overflow-hidden rounded-xl border border-gray-200">
-        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 px-4 py-2">
+        <div class="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-2">
           <img :src="client.logo" :alt="client.name" class="size-8 flex-none rounded-lg bg-white p-1.5 ring-1 ring-gray-900/10" />
           <div class="text-sm font-medium leading-6 text-gray-900">{{ client.name }}</div>
           <Menu as="div" class="relative ml-auto">
