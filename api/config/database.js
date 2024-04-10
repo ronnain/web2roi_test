@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 
 const config = {
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: 'test',
+    password: 'test360&1',
     database: 'tech_interview'
 };
 
