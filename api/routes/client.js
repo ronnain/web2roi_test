@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:clientId', async (req, res) => {
-    const clientId = req.params.id || 1;
+    const clientId = req.params.clientId || 1;
     const lastSales = await client.getLastSales(clientId);
     const totalCA = await client.getClientCA(clientId);
     const totalSales = await client.getClientTotalSales(clientId);
@@ -28,15 +28,18 @@ router.get('/:clientId', async (req, res) => {
     });
 });
 
-router.post('/:id/sales', async (req, res) => {
-    const clientId = req.params.id || 1;
-    const salesByMonth = await client.getClientSalesByMonth(clientId);
-    res.json({
-        status: 'success',
-        content: {
-            salesByMonth,
-        },
+router.get('/:id/sales', async (req, res) => {
+        const clientId = req.params.id || 1;
+        console.log('clientId', clientId);
+        const salesByMonth = await client.getClientSalesByMonth(clientId);
+        res.json({
+            status: 'success',
+            content: {
+                salesByMonth,
+            },
+        });
+
     });
-});
+
 
 export default router;
