@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 
 app.use('/dashboard', dashboard);
 app.use('/client', client);
-app.use('/managers', managers);
+app.use('/manager', managers);
 
 app.listen(port, () => {
     console.log(`Api listening on port ${port}`);

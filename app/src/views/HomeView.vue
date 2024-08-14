@@ -3,14 +3,17 @@ import Sales from "@/components/Sales.vue";
 import Stats from "@/components/Stats.vue";
 import RecentClients from "@/components/RecentClients.vue";
 import { onMounted, ref } from "vue";
+import type { Sale } from "@/types/sales";
+import type { Client } from "@/types/Client";
+import type { Stat } from "@/types/Stats";
 
 const loading = ref(false);
 
-const sales = ref(null);
-const lastClients = ref(null);
-const totalCA = ref(null);
-const totalSales = ref(null);
-const totalClients = ref(null);
+const sales = ref<Sale[] | null>(null);
+const lastClients = ref<Client[] | null>(null);
+const totalCA = ref<Stat | null>(null);
+const totalSales = ref<Stat | null>(null);
+const totalClients = ref<Stat | null>(null);
 
 async function getDashboardData() {
   try {
@@ -43,11 +46,15 @@ onMounted(async () => {
   <div>
     <div class="flex flex-col gap-10" v-if="!loading">
       <div>
-        <Stats :items="[totalCA, totalSales, totalClients]" name="Dashboard" />
+        <Stats v-if="totalCA && totalSales && totalSales" :items="[totalCA, totalSales, totalSales]" name="Dashboard" />
       </div>
-      <div class="flex flex-col md:flex-row gap-10">
-        <Sales :sales="sales" />
-        <RecentClients :lastClients="lastClients" />
+      <div class="flex flex-col md:flex-row gap-10" v-if="!!sales">
+        <Sales :sales="sales" >
+          <template v-slot:header>
+            Liste des ventes effectuées par nos clients.
+          </template>
+        </Sales>
+        <RecentClients :lastClients="lastClients" v-if="lastClients"/>
       </div>
     </div>
     <div v-else>

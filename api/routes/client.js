@@ -30,7 +30,6 @@ router.get('/:clientId', async (req, res) => {
 
 router.get('/:id/sales', async (req, res) => {
         const clientId = req.params.id || 1;
-        console.log('clientId', clientId);
         const salesByMonth = await client.getClientSalesByMonth(clientId);
         res.json({
             status: 'success',
