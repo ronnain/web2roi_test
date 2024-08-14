@@ -51,4 +51,4 @@ $result = $sqlQuery->fetchAll(\PDO::FETCH_ASSOC);
 
 header("Content-Type: application/json");
 http_response_code(200);
-var_dump($result);
+echo json_encode($data);
