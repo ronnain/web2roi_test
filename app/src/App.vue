@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 
 import {
   Dialog,
@@ -40,6 +41,7 @@ const sidebarOpen = ref(false)
 
 <template>
   <div>
+    <VueQueryDevtools />
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog as="div" class="relative z-50 lg:hidden" @close="sidebarOpen = false">
         <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">

@@ -18,8 +18,13 @@ const getConnection = async () => {
 
 export const db = async (...args) => {
     const connection = await getConnection();
-    const [res] = await connection.query(...args);
-    return res;
+    try {
+        const [res] = await connection.query(...args);
+        return res;
+    }  finally {
+        await connection.end();
+    }
+
 };
 
 // Generate random sales for each client (only used for the demo)

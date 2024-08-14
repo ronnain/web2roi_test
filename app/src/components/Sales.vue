@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
 
-type Sale = {
-  id: string;
-  clientId: string;
-  quantity: number;
-  amount: number;
-  roi: number;
-}
 
 defineProps({
   sales: {
@@ -24,7 +17,7 @@ defineProps({
           Ventes
         </h1>
         <p class="mt-2 text-sm text-gray-700">
-          Liste des ventes effectuées par nos clients.
+          <slot name="header"></slot>
         </p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
