@@ -12,6 +12,7 @@ export default {
         const lastClients = await db('SELECT * FROM clients ORDER BY createdAt DESC LIMIT 3');
         const clients = [];
         for (const client of lastClients) {
+            // todo on peut sans doute optimiser en regroupant ces 2 requêtes
             const lastSale = await db('SELECT * FROM sales WHERE clientId = ? ORDER BY date DESC LIMIT 1', [client.id]);
             const totalCA = await db('SELECT SUM(amount) as total FROM sales WHERE clientId = ?', [client.id]);
             clients.push({
