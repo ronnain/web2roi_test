@@ -1,8 +1,8 @@
 <?php
 // Si c'est un fichier pour tester en local c'est ok
 // C'est un controller, on pourrait utiliser un framework pour gagner en lisibilité/sécurité.
-// J'ai pas fait de class, mais c'est une bonne idée de le faire pour encapsuler la logique.
-// Avec ce que j'ai fait, ce n'est pas simple de changer le code
+// J'ai pas fait de class, mais c'est une bonne idée de le faire pour encapsuler la logique. Et c'est ce qui est généralement fait en php
+
 
 function getAndValidateIds() {
     $ids = isset($_GET['ids']) ? $_GET['ids'] : [];
